@@ -16,13 +16,22 @@ import Framework7ThemeColors from 'framework7/dist/css/framework7.material.color
 */
 
 // Import App Custom Styles
+import iconfont from  '../static/assets/iconfont/iconfont.css'
 import AppStyles from './css/app.css'
+
 
 // Import Routes
 import Routes from './routes.js'
 
+
+// Import vue-resource
+import VueResource from 'vue-resource'
+Vue.use(VueResource)
+
 // Import App Component
 import App from './app'
+
+
 
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue)
