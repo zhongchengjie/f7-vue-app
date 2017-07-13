@@ -1,6 +1,6 @@
 <template>
 	  <div>
-		  <appNavbar :type="'1'" :title="'注册'"></appNavbar>
+        <appNavbar :type="'1'" :title="'注册'"></appNavbar>
 	    <f7-pages>
 	      <f7-page name="register">
 	         <f7-list form>

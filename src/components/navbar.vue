@@ -4,7 +4,14 @@
 		  	<f7-link icon="iconfont icon-fanhui" back></f7-link>
 		  </f7-nav-left>
 		  <f7-nav-center>{{title}}</f7-nav-center>
-		</f7-navbar>
+	  </f7-navbar>
+
+	 <f7-navbar v-else-if="type=='2'">
+		 <f7-nav-center>{{title}}</f7-nav-center>
+		 <f7-nav-right sliding>
+			 <f7-link  icon="iconfont icon-plus" @click="iconClick"></f7-link>
+		 </f7-nav-right>
+	 </f7-navbar>
       
 </template>
 
@@ -16,6 +23,12 @@ export default {
 	  	 return{
 	  	 	  a:1
 	  	 }
+	  },
+	  methods:{
+	      iconClick:function () {
+              eventBus.$emit("iconClick");     //点击右边图标
+          }
 	  }
+	  
 }
 </script>

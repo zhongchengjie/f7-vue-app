@@ -7,10 +7,18 @@ body{font-family:"Helvetica, Arial, sans-serif,Helvetica Neue";}
 .navbar .left i.iconfont{margin-left:-20px}
 .navbar .center{font-size: 18px;color: #ffffff;}
 .navbar .right a{color: #ffffff;}
+.navbar .right i.iconfont{font-size:26px;margin-top:8px}
 
 /* 工具栏 css */
 .toolbar-inner .iconfont{font-size:24px}
 .toolbar-inner .tabbar-label{font-size:12px}
 .tabbar a.active{color:#ff2d55}
 
-.big-red-btn{background:#ff2d55!important;letter-spacing: 2px}
+/*  按钮 css */
+p.big-btn{width:80%;margin:10px auto}
+p.big-btn .button{letter-spacing: 2px;height:34px;line-height:32px;font-size:16px}
+
+/*  标签页按钮 css */
+.new-tab-btn.buttons-row .button{border:none;color:#555;font-weight:600;letter-spacing: 2px}
+.new-tab-btn.buttons-row .button.active{background: none;color:#ff2d55;border-radius:0px}
+.new-tab-btn.buttons-row .button.active span{padding:10px 10px 6px 10px;border-bottom:2px solid #ff2d55;}
