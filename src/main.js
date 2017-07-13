@@ -23,7 +23,6 @@ import AppStyles from './css/app.css'
 // Import Routes
 import Routes from './routes.js'
 
-
 // Import vue-resource
 import VueResource from 'vue-resource'
 Vue.use(VueResource)
@@ -31,8 +30,12 @@ Vue.use(VueResource)
 // Import App Component
 import App from './app'
 
+//vuex
+import store from "./store"
+window.store = store;
 
-
+//eventBus
+window.eventBus = new Vue();
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue)
 

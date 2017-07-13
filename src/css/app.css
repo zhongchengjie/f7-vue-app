@@ -3,11 +3,14 @@ body{font-family:"Helvetica, Arial, sans-serif,Helvetica Neue";}
 
 /* 导航条 css */
 .navbar{background: #ff2d55}
-.navbar  .left a{color: #ffffff;margin-left:5px}
-.navbar  .center{font-size: 18px;color: #ffffff;}
-.navbar  .right a{color: #ffffff;}
+.navbar .left a{color: #ffffff;margin-left:5px}
+.navbar .left i.iconfont{margin-left:-20px}
+.navbar .center{font-size: 18px;color: #ffffff;}
+.navbar .right a{color: #ffffff;}
 
 /* 工具栏 css */
 .toolbar-inner .iconfont{font-size:24px}
 .toolbar-inner .tabbar-label{font-size:12px}
 .tabbar a.active{color:#ff2d55}
+
+.big-red-btn{background:#ff2d55!important;letter-spacing: 2px}
