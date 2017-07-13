@@ -72,7 +72,9 @@ export default {
                 	 localStorage.setItem("loginState",'1'); //标记为登录状态
                 	 var user = result[0];
                 	 localStorage.setItem("userName",user.user_name);
-                	 //eventBus.$emit("setUserInfo");
+                	 eventBus.$emit("setUserInfo");     //更新登录用户
+                	 
+                	 
                 }
             })
         },

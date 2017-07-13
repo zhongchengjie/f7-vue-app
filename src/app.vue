@@ -10,6 +10,14 @@
               <div class="banner">
                 <img src="../static/assets/images/banner.jpg">
               </div>
+							<f7-buttons>
+							  <f7-button tab-link="#tab-1" active>最新动态</f7-button>
+							  <f7-button tab-link="#tab-2">热门话题</f7-button>
+							</f7-buttons>
+              <f7-tabs>
+							  <f7-tab id="tab-1" active>Tab 1 content...</f7-tab>
+							  <f7-tab id="tab-2">Tab 2 content...</f7-tab>
+							</f7-tabs>
           </f7-page>
         </f7-pages>
       </f7-view> <!--end of view1-->
@@ -49,7 +57,7 @@ export default {
     name:"app",
     data:function () {
        return {
-       	   user:{user_name:localStorage.getItem("userName")||"---"},
+       	   user:{user_name:localStorage.getItem("userName")||"Not Login"},
            state:localStorage.getItem("loginState")||'0'
        }
     },
@@ -57,10 +65,11 @@ export default {
     	 loginView
     },
     created:function () {
-    	
+    	 
     },
     mounted:function(){
-    	 eventBus.$on("setUserInfo", this.setUserInfo());
+    	
+    	 eventBus.$on("setUserInfo", this.setUserInfo);
     },
     updated:function (){
     	  
@@ -75,7 +84,10 @@ export default {
        	   localStorage.setItem("userName","");
        },
        setUserInfo:function(){
-       	   this.user.user_name = localStorage.getItem("userName");
+            //alert(localStorage.getItem("userName"));
+            //console.log(window.f7)
+            window.f7.showTab("#view-1");
+       	    this.user.user_name = localStorage.getItem("userName");
        }
     }
 }
@@ -85,8 +97,12 @@ export default {
 	.list-block.media-list {margin:0 auto}
   .list-block.media-list .item-media img{width:60px;height:60px;border-radius:50%}
   .list-block.media-list .item-subtitle{color:#666;font-size:14px;margin-top:10px}
+  
+   .list-block .item-media .iconfont{font-size:20px}
 </style>
 <style scoped>
   .banner{width:100%;height:26%}
   .banner img{width:100%;height:100%}
+  
+ 
 </style>
