@@ -80,6 +80,7 @@ export default {
                 	 //保存登录信息
                 	 var user = result[0];
                 	 localStorage.setItem("userId",user.user_id);
+                	 localStorage.setItem("userPwd",user.user_pwd);
                 	 localStorage.setItem("userName",user.user_name);
                 	 eventBus.$emit("setUserInfo");     //更新登录用户
                 	 

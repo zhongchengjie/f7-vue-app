@@ -6,6 +6,14 @@ export default [
     {
         path: '/addShare/',
         component: require('./pages/addShare.vue')
+    },
+    {
+        path: '/modifyPwd/',
+        component: require('./pages/modifyPwd.vue')
+    },
+    {
+        path: '/personInfo/',
+        component: require('./pages/personInfo.vue')
     }
 
 ]

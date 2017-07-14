@@ -26,6 +26,9 @@ export default {
 	      	  else if(this.type=="share"){      
 	      	  	  eventBus.$emit("share");     //发表
 	      	  }
+	      	  else if(this.type=="modifyPwd"){
+	      	  	  eventBus.$emit("modifyPwd");     //修改密码
+	      	  }
           }
 	  }
 	  

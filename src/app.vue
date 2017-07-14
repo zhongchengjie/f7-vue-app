@@ -33,7 +33,7 @@
           <f7-page name="myself" class="myself">
           	  <f7-list media-list>
                   <f7-list-item
-                    link="/item/"
+                    link="/personInfo/"
                     media="<img src='../static/assets/images/user_photo.jpg'>"
                     :title="user.user_name"
                     subtitle="哈哈哈哈哈哈"
@@ -42,7 +42,7 @@
               <f7-list style="margin-top:10px">
                   <f7-list-item link="/item/" media="<i class='icon iconfont icon-pengyouquan'></i>" title="我的圈子"></f7-list-item>
                   <f7-list-item link="/item/" media="<i class='icon iconfont icon-shoucang'></i>" title="我的收藏"></f7-list-item>
-                  <f7-list-item link="/item/" media="<i class='icon iconfont icon-shezhi'></i>" title="修改密码"></f7-list-item>
+                  <f7-list-item link="/modifyPwd/" media="<i class='icon iconfont icon-shezhi'></i>" title="修改密码"></f7-list-item>
               </f7-list>
               <div><big-btn :btn-name="'退出登录'" :bg="'#ff2d55'" :type="'logout'"></big-btn></div>
           </f7-page>
@@ -97,6 +97,7 @@ export default {
                localStorage.setItem("loginState",'0');  //标记为未登录状态
                //清除登录用户的信息
                localStorage.setItem("userName","");
+               localStorage.setItem("userPwd","");
                localStorage.setItem("userId","");
            },
            setUserInfo:function(){

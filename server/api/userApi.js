@@ -63,4 +63,18 @@ router.post('/register', (req, res) => {
      })
 });
 
+router.post('/modifyPwd', (req, res) => {
+     var sql = $sql.user.modify;
+     var params = req.body;
+     console.log(params);
+     conn.query(sql, [params.password,params.userId], function(err, result) {
+         if (err) {
+            console.log(err);
+         }
+         if (result) {
+            jsonWrite(res, result);
+         }
+     })
+});
+
 module.exports = router;
