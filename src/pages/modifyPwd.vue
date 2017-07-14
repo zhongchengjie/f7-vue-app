@@ -1,23 +1,23 @@
 <template>
 	  <div>
-        <appNavbar :type="'1'" :title="'注册'"></appNavbar>
+      <app-navbar :type="'1'" :title="'修改密码'"></app-navbar>
 	    <f7-pages>
 	      <f7-page name="register">
 	         <f7-list form style="margin-top:0px;">
               <f7-list-item>
-                <f7-label>手机号</f7-label>
-                <f7-input type="text" placeholder="请输入手机号码" v-model="user.mobile"/>
+                <f7-label>旧密码</f7-label>
+                <f7-input type="password" placeholder="请输入旧密码" v-model="user.mobile"/>
               </f7-list-item>
               <f7-list-item>
-                <f7-label>用户名</f7-label>
-                <f7-input type="text" placeholder="请输入用户名" v-model="user.name"/>
+                <f7-label>新密码</f7-label>
+                <f7-input type="password" placeholder="请输入新密码" v-model="user.name"/>
               </f7-list-item>
               <f7-list-item>
-                <f7-label>密码</f7-label>
-                <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
+                <f7-label>确认新密码</f7-label>
+                <f7-input type="password" placeholder="请再次输入新密码" v-model="user.password"/>
               </f7-list-item>
             </f7-list>
-            <div><bigBtn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></bigBtn></div>
+            <div><big-btn :btn-name="'提交'" :bg="'#ff2d55'" :type="'modifyPwd'"></big-btn></div>
 	      </f7-page>
 	    </f7-pages>
     </div>
@@ -35,14 +35,14 @@ export default {
 	 	  }
 	 },
 	 components:{
-	 	  appNavbar,
-	 	  bigBtn
+	 	  "app-navbar":appNavbar,
+	 	  "big-btn":bigBtn
 	 },
 	 mounted:function(){
-    	eventBus.$on("register", this.register);
+    	eventBus.$on("modifyPwd", this.modifyPwd);
    },
 	 methods:{
-	 	  register:function(){
+	 	  modifyPwd:function(){
 	 	  	  var _this = this;
 	 	  	  var id = new Date().getTime();  //取当前时间戳作为user_id
           this.$http.post('/api/user/register',{id:id,name:_this.user.name,mobile:_this.user.mobile,password:_this.user.password},{}).then((response) => {

@@ -36,6 +36,10 @@ window.store = store;
 
 //eventBus
 window.eventBus = new Vue();
+
+//dom7对象
+window.$$ = window.Dom7;
+
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue)
 

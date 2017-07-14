@@ -4,8 +4,8 @@ export default [
         component: require('./pages/register.vue')
     },
     {
-        path: '/addBlog/',
-        component: require('./pages/addBlog.vue')
+        path: '/addShare/',
+        component: require('./pages/addShare.vue')
     }
 
 ]

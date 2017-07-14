@@ -21,4 +21,7 @@ p.big-btn .button{letter-spacing: 2px;height:34px;line-height:32px;font-size:16p
 /*  标签页按钮 css */
 .new-tab-btn.buttons-row .button{border:none;color:#555;font-weight:600;letter-spacing: 2px}
 .new-tab-btn.buttons-row .button.active{background: none;color:#ff2d55;border-radius:0px}
-.new-tab-btn.buttons-row .button.active span{padding:10px 10px 6px 10px;border-bottom:2px solid #ff2d55;}
+.new-tab-btn.buttons-row .button.active span{padding:10px 10px 4px 10px;border-bottom:2px solid #ff2d55;}
+
+/*  文本框 css */
+.item-textarea textarea{height:120px}

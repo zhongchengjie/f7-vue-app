@@ -9,8 +9,7 @@ var opn = require('opn')
 var path = require('path')
 var express = require('express')
 var bodyParser = require('body-parser');
-var userApi = require('../server/api/userApi');
-var webpack = require('webpack')
+var webpack = require('webpack');
 var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
@@ -25,7 +24,12 @@ var proxyTable = config.dev.proxyTable
 var app = express()
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+var userApi = require('../server/api/userApi');
+var shareApi = require('../server/api/shareApi');
+var uploadApi = require('../server/api/uploadApi');
 app.use('/api/user', userApi);
+app.use('/api/share', shareApi);
+app.use('/upload',uploadApi);
 
 var compiler = webpack(webpackConfig)
 

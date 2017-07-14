@@ -7,14 +7,25 @@
 <script>
 export default {
 	  name:"navbar",
-	  props:["btnName","bg"],
+	  props:["btnName","bg","type"],
 	  data:function(){
 	  	 return{
 	  	 }
 	  },
 	  methods:{
 	      btnClick:function () {
-              //eventBus.$emit("iconClick");     //点击右边图标
+	      	  if(this.type=="logout"){
+	      	  	  eventBus.$emit("logout");     //退出登录
+	      	  }
+	      	  else if(this.type=="login"){
+	      	  	  eventBus.$emit("login");     //用户登录
+	      	  }
+	      	  else if(this.type=="register"){
+	      	  	  eventBus.$emit("register");     //用户注册
+	      	  }
+	      	  else if(this.type=="share"){      
+	      	  	  eventBus.$emit("share");     //发表
+	      	  }
           }
 	  }
 	  

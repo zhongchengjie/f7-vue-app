@@ -1,0 +1,8 @@
+/* 最新动态列表 css*/
+.share-list{margin-top:20px}
+.share-list ul{padding-bottom:20px}
+.share-list ul li{margin-bottom:20px}
+.share-list .item-media img{width:48px;height:48px;border-radius: 50%;}
+.share-list .item-inner:after{display: none;}
+.share-list .item-subtitle{margin-top: 10px;color:#999;font-size:13px}
+.share-list .share-content{padding-left:10px;magint-top:10px;font-size:14px;}
