@@ -82,9 +82,9 @@ export default {
                 	 localStorage.setItem("userId",user.user_id);
                 	 localStorage.setItem("userPwd",user.user_pwd);
                 	 localStorage.setItem("userName",user.user_name);
+                	 localStorage.setItem("signature",user.user_signature);
+                	 localStorage.setItem("userPhoto",user.user_photo)
                 	 eventBus.$emit("setUserInfo");     //更新登录用户
-                	 
-                	 
                 }
             })
         },

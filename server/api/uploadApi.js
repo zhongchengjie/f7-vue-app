@@ -7,7 +7,7 @@ var router = express.Router();
 var formidable = require('formidable'),
 fs = require('fs'),
 TITLE = 'formidable上传示例',
-AVATAR_UPLOAD_FOLDER = '/uploadImg/',
+AVATAR_UPLOAD_FOLDER = '/images/',
 domain = "http://localhost:8090";
 
 /* 图片上传路由 */
@@ -15,7 +15,7 @@ router.post('/uploadImg', function(req, res) {
 
   var form = new formidable.IncomingForm();   //创建上传表单
   form.encoding = 'utf-8';        //设置编辑
-  form.uploadDir = 'static/assets' + AVATAR_UPLOAD_FOLDER;     //设置上传目录
+  form.uploadDir = 'static/assets/upload' + AVATAR_UPLOAD_FOLDER;     //设置上传目录
   form.keepExtensions = true;     //保留后缀
   form.maxFieldsSize = 2 * 1024 * 1024;   //文件大小
 
@@ -54,7 +54,7 @@ router.post('/uploadImg', function(req, res) {
     //图片写入地址；
     var newPath = form.uploadDir + avatarName;
     //显示地址；
-    var showUrl = "../../static/assets" + AVATAR_UPLOAD_FOLDER + avatarName;
+    var showUrl = "../../static/assets/upload" + AVATAR_UPLOAD_FOLDER + avatarName;
     console.log("newPath",newPath);
     fs.renameSync(files.fulAvatar.path, newPath);  //重命名
     res.json({

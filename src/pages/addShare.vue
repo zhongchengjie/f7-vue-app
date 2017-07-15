@@ -1,8 +1,8 @@
 <template>
 	  <div>
-      <appNavbar :type="'1'" :title="'发布圈子'"></appNavbar>
+      <app-navbar :type="'1'" :title="'发布圈子'"></app-navbar>
 	    <f7-pages>
-            <pageView :page-name="'addShare'">
+            <page-view :page-name="'addShare'">
                 <div  slot="f7-page-content">
                     <f7-list form style="margin:0px auto" enctype="multipart/form-data" id="shareForm">
                         <f7-list-item>
@@ -16,13 +16,11 @@
                         	 </div> 
                         </div>
                     </f7-list>
-                    <div><bigBtn :btn-name="'发表'" :bg="'#ff2d55'" :type="'share'"></bigBtn></div>
+                    <div><big-btn :btn-name="'发表'" :bg="'#ff2d55'" :type="'share'"></big-btn></div>
                 </div>
-            </pageView>
-          
+            </page-view>
 	    </f7-pages>
-    </div>
-      
+    </div>     
 </template>
 
 <script>
@@ -39,9 +37,9 @@ export default {
 	 	  }
 	 },
 	 components:{
-         appNavbar,
-         pageView,
-         bigBtn
+         "app-navbar":appNavbar,
+         "page-view":pageView,
+         "big-btn":bigBtn
 	 },
    mounted:function () {
        eventBus.$on("share", this.shareMoments);
@@ -50,7 +48,7 @@ export default {
 	 	  shareMoments:function(){
 	 	  	  var _this = this;
 	 	  	  var user_id = localStorage.getItem("userId")
-          this.$http.post('/api/share/add',{share_content:_this.share_content,user_id:user_id},{}).then((response) => {
+          this.$http.post('/api/share/add',{content:_this.share_content,photo:_this.imgList.join(','),user_id:user_id},{}).then((response) => {
                 var result = response.body;
                 console.log(result);
                 if(result){
@@ -93,7 +91,7 @@ export default {
 	 .img-box{display:flex;padding:10px}
 	 .img-box .img-item{width:60px;height:60px;border:1px solid #ccc;text-align:center;line-height:60px;position:relative;margin-right:6px}
 	 .img-box .img-item i{color:#ff2d55;font-size:46px;}
-	 .img-box .img-item .icon-plus:before{margin-left:-9px;margin-top: 3px;}
+	 .img-box .img-item .icon-plus:before{margin-left:-9px;margin-top:4px;}
 	 .img-box .img-item input{width:60px;height:60px;opacity: 0;position:absolute;left:0;right:0}
 	 .img-box .img-item img{width:100%;height:100%;}
 </style>

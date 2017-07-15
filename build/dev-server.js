@@ -26,9 +26,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 var userApi = require('../server/api/userApi');
 var shareApi = require('../server/api/shareApi');
+var favorApi = require('../server/api/favorApi');
 var uploadApi = require('../server/api/uploadApi');
 app.use('/api/user', userApi);
 app.use('/api/share', shareApi);
+app.use('/api/favor', favorApi);
 app.use('/upload',uploadApi);
 
 var compiler = webpack(webpackConfig)

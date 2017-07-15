@@ -40,7 +40,7 @@ router.post('/add', (req, res) => {
      var sql = $sql.share.add;
      var params = req.body;
      console.log(params);
-     conn.query(sql, [params.share_content,params.user_id], function(err, result) {
+     conn.query(sql, [params.content,params.photo,params.user_id], function(err, result) {
          if (err) {
             console.log(err);
          }
@@ -50,5 +50,47 @@ router.post('/add', (req, res) => {
      })
 });
 
+//分享详情
+router.get('/getDetail', (req, res) => {
+    var sql = $sql.share.detail;
+    conn.query(sql,function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
 
+
+//点赞
+router.post('/updateLikeNum', (req, res) => {
+     var sql = $sql.share.updateLikeNum;
+     var params = req.body;
+     console.log(params);
+     conn.query(sql, [params.share_id], function(err, result) {
+         if (err) {
+            console.log(err);
+         }
+         if (result) {
+            jsonWrite(res, result);
+         }
+     })
+});
+
+//收藏
+router.post('/updateFavorNum', (req, res) => {
+     var sql = $sql.share.updateFavorNum;
+     var params = req.body;
+     console.log(params);
+     conn.query(sql, [params.share_id], function(err, result) {
+         if (err) {
+            console.log(err);
+         }
+         if (result) {
+            jsonWrite(res, result);
+         }
+     })
+});
 module.exports = router;

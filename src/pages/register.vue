@@ -1,6 +1,6 @@
 <template>
 	  <div>
-        <appNavbar :type="'1'" :title="'注册'"></appNavbar>
+      <app-navbar :type="'1'" :title="'注册'"></app-navbar>
 	    <f7-pages>
 	      <f7-page name="register">
 	         <f7-list form style="margin-top:0px;">
@@ -17,7 +17,7 @@
                 <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
               </f7-list-item>
             </f7-list>
-            <div><bigBtn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></bigBtn></div>
+            <div><big-btn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></big-btn></div>
 	      </f7-page>
 	    </f7-pages>
     </div>
@@ -35,8 +35,8 @@ export default {
 	 	  }
 	 },
 	 components:{
-	 	  appNavbar,
-	 	  bigBtn
+	 	  "app-navbar":appNavbar,
+	 	  "big-btn":bigBtn
 	 },
 	 mounted:function(){
     	eventBus.$on("register", this.register);
