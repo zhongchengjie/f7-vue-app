@@ -31,7 +31,7 @@ var uploadApi = require('../server/api/uploadApi');
 app.use('/api/user', userApi);
 app.use('/api/share', shareApi);
 app.use('/api/favor', favorApi);
-app.use('/upload',uploadApi);
+app.use('/img',uploadApi);
 
 var compiler = webpack(webpackConfig)
 
@@ -73,6 +73,7 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
+app.use(express.static('./public'))
 
 var uri = 'http://localhost:' + port
 

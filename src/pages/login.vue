@@ -20,7 +20,7 @@
 	    </f7-pages>
 	  </f7-view>
 	</f7-login-screen>
-  <f7-login-screen opened v-else>
+    <f7-login-screen opened v-else>
 	  <f7-view navbar-through toolbar-through>
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
@@ -60,7 +60,6 @@ export default {
     	 
     },
     create:function(){
-    	// console.log("login"+this.loginState)
     },
     mounted:function(){
     	eventBus.$on("login", this.login);
@@ -75,18 +74,25 @@ export default {
                 	 window.f7.alert("用户名或密码错误");
                 }
                 else{
-                	 window.f7.closeModal(".login-screen"); //关闭登录屏
                 	 localStorage.setItem("loginState",'1'); //标记为登录状态
-                	 //保存登录信息
+                	 //保存登录用户的信息
                 	 var user = result[0];
                 	 localStorage.setItem("userId",user.user_id);
                 	 localStorage.setItem("userPwd",user.user_pwd);
                 	 localStorage.setItem("userName",user.user_name);
                 	 localStorage.setItem("signature",user.user_signature);
                 	 localStorage.setItem("userPhoto",user.user_photo)
-                	 eventBus.$emit("setUserInfo");     //更新登录用户
+
+                	 eventBus.$emit("loginAfter");     //更新登录用户的信息
+
+                     window.f7.closeModal(".login-screen"); //关闭登录屏
+                     window.f7.showTab("#view-1");        //默认显示第一个tab页
+
+
                 }
-            })
+            },(response) =>{
+                console.log(JSON.stringify(response));
+            });
         },
     }
 }

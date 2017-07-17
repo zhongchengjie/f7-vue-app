@@ -10,6 +10,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(favicon(__dirname + '/src/assets/favicon.ico'));
 app.use(express.static('dist'));
+app.use(express.static('public'));
 
 app.get('/',(req,res,next) => {
 	res.sendFile('./dist/index.html');
@@ -22,7 +23,7 @@ var uploadApi = require('./server/api/uploadApi');
 app.use('/api/user', userApi);
 app.use('/api/share', shareApi);
 app.use('/api/favor', favorApi);
-app.use('/upload',uploadApi);
+app.use('/img',uploadApi);
 
 app.listen(port, () => {
   console.log(`服务器运行在端口:${port}`)

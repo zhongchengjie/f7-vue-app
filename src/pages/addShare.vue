@@ -66,7 +66,7 @@ export default {
      	    //用form 表单直接 构造formData 对象; 就不需要下面的append 方法来为表单进行赋值了。
 	        var formData = new FormData($$("#shareForm")[0]);
 	        $$.ajax({
-	            url: "/upload/uploadImg",
+	            url: "/img/uploadImg",
 	            method: 'POST',
 	            data: formData,
 	            processData: false,     //必须false才会避开jQuery对 formdata 的默认处理,XMLHttpRequest会对 formdata 进行正确的处理

@@ -6,9 +6,9 @@
           	  <f7-list media-list>
                   <f7-list-item
                     link="/personInfo/"
-                    media="<img src='../static/assets/images/user_photo.jpg'>"
-                    :title="user.user_name"
-                    subtitle="哈哈哈哈哈哈"
+                    :media="'<img src='+user.u_photo+'>'"
+                    :title="user.u_name"
+                    :subtitle="user.u_signature"
                   ></f7-list-item>
               </f7-list>
               <f7-list style="margin-top:10px">
@@ -28,9 +28,10 @@
 import bigBtn from "../components/bigbtn.vue";
 export default {
     name:"home",
+    props:["user"],
     data:function () {
        return {
-       	   user:{user_name:localStorage.getItem("userName")||"Not Login"},
+
        }
     },
     components:{
@@ -64,9 +65,8 @@ export default {
 </script>
 
 <style>
-    .person  .list-block.media-list {margin:0 auto}
+    .person  .list-block.media-list {margin-top:10px;margin-bottom:0px}
     .person  .list-block.media-list .item-media img{width:60px;height:60px;border-radius:50%}
     .person  .list-block.media-list .item-subtitle{color:#666;font-size:14px;margin-top:10px}
-  
-    .person  .list-block .item-media .iconfont{font-size:20px}
+    .person  .list-block .item-media i.iconfont{font-size:20px}
 </style>

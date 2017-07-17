@@ -14,10 +14,6 @@ export default [
     {
         path: '/personInfo/',
         component: require('./pages/personInfo.vue')
-    },
-    {
-        path: '/shareDetail/share/:shareId',
-        component: require('./pages/shareDetail.vue')
     }
 
 ]
