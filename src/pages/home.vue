@@ -7,11 +7,11 @@
                 <img src="../../static/assets/images/banner.jpg">
               </div>
               <f7-list media-list  class="share-list">
-                  <f7-list-item v-for="item in shareList"
+                  <f7-list-item v-for="item in list"
                                 media="<img src='../../static/assets/images/user_photo.jpg'>"
                                 :title="item.user_name"
-                                :subtitle="item.create_time">
-                      <div slot="root" class="share-content">{{item.share_content}}</div>
+                                :after="timeTransform(item.share_time)"
+                                :text="item.share_content">
                       <div slot="root" class="share-photo" v-if="item.share_photo">
                           <img v-for="photo in item.share_photo_arr" :src="photo" ></img>
                       </div>
@@ -34,22 +34,19 @@ export default {
     props:["shareList"],
     data:function () {
        return {
+
        }
     },
     components:{
         "app-navbar":appNavbar
     },
-    created:function () {
-
+    mounted:function (){
+        eventBus.$on("iconClick", this.addShare);         //新增
     },
-    mounted:function(){
-        eventBus.$on("iconClick", this.addShare);
-        if(localStorage.getItem("loginState")=='1'){
-            this.getNewShare();
+    computed:{
+        list:function(){
+            return this.shareList;
         }
-    },
-    updated:function (){
-    	  
     },
     methods:{
         //刷新数据
@@ -61,14 +58,36 @@ export default {
         //查询最新动态的数据
         getNewShare:function(){
             this.$http.get('/api/share/getAll').then((data) => {
-                this.shareList = data.body;
-                console.log(this.shareList);
-                var shareList = this.shareList;
+                var shareList = data.body;
                 for(var i=0;i<shareList.length;i++){
                     shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
                 }
+                this.shareList = shareList;
             });
             //window.f7.pullToRefreshDone();
+        },
+        //时间格式转换
+        timeTransform:function(timeStr){
+            var result = timeStr;
+            var timeStr = timeStr.replace(/-/g,"/")
+            var date_time =new Date(timeStr);
+            var timeStamp1 = date_time.getTime();   //创建时间的时间戳1
+            var timeStamp2 = new Date().getTime();  //当前时间的时间戳2
+            var _time = parseInt((timeStamp2-timeStamp1)/60000);      //相差分钟数
+            //console.log(_time);
+            if(_time<3){
+                result = "刚刚"
+            }
+            else if(_time<60){
+                result = _time+"分钟前"
+            }
+            else if(_time<24*60){
+                result = parseInt(_time/24)+"小时前"
+            }
+            else{
+                result = timeStr.substr(11);
+            }
+            return result;
         },
         //发表新主题
         addShare:function(){
@@ -107,11 +126,15 @@ export default {
         },
         //更新点赞数量
         updateLikeNum:function(share_id){
-            console.log(share_id);
+
+            console.log($$(event.target.parentNode).text());
+            var event_dom = $$(event.target.parentNode);
+            var num = parseInt(event_dom.text());
             this.$http.post('/api/share/updateLikeNum',{share_id:share_id},{}).then((response) => {
                 var result = response.body;
                 console.log(result);
                 if(result){
+                    event_dom.html("<i class='icon iconfont icon-hengtianjinfuicon03'>&nbsp;"+(num+1)+"</i>")
                     window.f7.alert("已赞");
                 }
                 else{

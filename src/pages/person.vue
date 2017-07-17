@@ -6,9 +6,9 @@
           	  <f7-list media-list>
                   <f7-list-item
                     link="/personInfo/"
-                    :media="'<img src='+user.u_photo+'>'"
-                    :title="user.u_name"
-                    :subtitle="user.u_signature"
+                    :media="'<img src='+userInfo.u_photo+'>'"
+                    :title="userInfo.u_name"
+                    :subtitle="userInfo.u_signature"
                   ></f7-list-item>
               </f7-list>
               <f7-list style="margin-top:10px">
@@ -45,6 +45,11 @@ export default {
     },
     updated:function (){
     	  
+    },
+    computed:{
+        userInfo:function(){
+            return this.user;
+        }
     },
     methods:{
           //退出登录

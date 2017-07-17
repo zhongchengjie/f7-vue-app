@@ -1,16 +1,16 @@
 .banner{width:100%;height:26%}
 .banner img{width:100%;height:100%}
 /* 最新动态列表 css*/
-.share-list{margin-top:10px}
+.share-list{margin-top:0px}
 .share-list ul{padding-bottom:20px}
 .share-list ul li{margin-bottom:20px}
 .share-list .item-media img{width:48px;height:48px;border-radius: 50%;}
 .share-list .item-inner:after{display: none;}
-.share-list .item-subtitle{margin-top:8px;color:#999;font-size:13px}
-.share-list .share-content{padding-left:10px;magint-top:10px;font-size:14px;}
-.share-list .share-photo{padding-left:10px;margin-top:6px;display: flex;}
-.share-list .share-photo img{width:100px;height:100px;margin-right:10px}
-.share-list .share-icon{padding-left:10px;margin-top:10px;}
-.share-list .share-icon i.iconfont.icon-hengtianjinfuicon03{font-size:16px}
+.share-list .item-after{font-size: 14px;margin-top:4px}
+.share-list .item-text{margin-top:6px;color:#333;height:auto}
+.share-list .share-photo{padding-left:74px;margin-top:6px;display: flex;}
+.share-list .share-photo img{width:80px;height:80px;margin-right:5px}
+.share-list .share-icon{text-align:right;margin-top:8px;padding-right:20px}
+.share-list .share-icon i.iconfont.icon-hengtianjinfuicon03{font-size:16px;margin-top:-2px}
 .share-list .share-icon i.iconfont.icon-xihuan{font-size:18px}
 

@@ -32,11 +32,9 @@ export default {
         "person-view":personView,
         "login-view":loginView
     },
-    created:function () {
-
-    },
     mounted:function(){
         eventBus.$on("loginAfter", this.loginAfter);
+        eventBus.$on("refresh", this.getNewShare);       //重新加载数据
     },
     updated:function (){
     	  
@@ -45,12 +43,11 @@ export default {
         //查询最新动态的数据
         getNewShare:function(){
             this.$http.get('/api/share/getAll').then((data) => {
-                this.shareList = data.body;
-                console.log(this.shareList);
-                var shareList = this.shareList;
+                var shareList = data.body;
                 for(var i=0;i<shareList.length;i++){
                     shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
                 }
+                this.shareList = shareList;
             })
         },
         //回填登录用户的信息

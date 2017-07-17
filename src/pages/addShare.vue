@@ -41,49 +41,59 @@ export default {
          "page-view":pageView,
          "big-btn":bigBtn
 	 },
-   mounted:function () {
-       eventBus.$on("share", this.shareMoments);
-   },
-	 methods:{
-	 	  shareMoments:function(){
-	 	  	  var _this = this;
-	 	  	  var user_id = localStorage.getItem("userId")
-          this.$http.post('/api/share/add',{content:_this.share_content,photo:_this.imgList.join(','),user_id:user_id},{}).then((response) => {
-                var result = response.body;
-                console.log(result);
-                if(result){
+     mounted:function () {
+         eventBus.$on("share", this.shareMoments);
+     },
+     destroyed:function(){
+         eventBus.$off("refresh");
+     },
+	 methods: {
+         shareMoments: function () {
+             var _this = this;
+             var user_id = localStorage.getItem("userId")
+             this.$http.post('/api/share/add', {
+                 content: _this.share_content,
+                 photo: _this.imgList.join(','),
+                 user_id: user_id
+             }, {}).then((response) => {
+                 var result = response.body;
+                 console.log(result);
+                 if (result) {
                      window.f7.alert("发布成功");
-                     _this.share_content="";
+                     _this.share_content = "";
                      window.f7.views[0].back();  //返回上一页
-                }
-                else{
+
+                     //刷新首页的动态
+                     eventBus.$emit("refresh");
+                 }
+                 else {
                      window.f7.alert("发布出错");
-                }
-          })
-      },
-      uploadImg:function(){
-      	  var _this = this;
-     	    //用form 表单直接 构造formData 对象; 就不需要下面的append 方法来为表单进行赋值了。
-	        var formData = new FormData($$("#shareForm")[0]);
-	        $$.ajax({
-	            url: "/img/uploadImg",
-	            method: 'POST',
-	            data: formData,
-	            processData: false,     //必须false才会避开jQuery对 formdata 的默认处理,XMLHttpRequest会对 formdata 进行正确的处理
-	            contentType: false,     //必须false才会自动加上正确的Content-Type
-	            success: function (responseStr) {
-	            	   //console.log(responseStr);
-	                 var imgPath = JSON.parse(responseStr).newPath;
-	                 console.log(imgPath);
-	                 _this.state=true;
-	                 _this.imgList.push(imgPath);
-	            },
-	            error: function (responseStr) {
-	                 window.f7.alert("上传出错");
-	            }
-	        });
-      }
-	 }
+                 }
+             })
+         },
+         uploadImg: function () {
+             var _this = this;
+             //用form 表单直接 构造formData 对象; 就不需要下面的append 方法来为表单进行赋值了。
+             var formData = new FormData($$("#shareForm")[0]);
+             $$.ajax({
+                 url: "/img/uploadImg",
+                 method: 'POST',
+                 data: formData,
+                 processData: false,     //必须false才会避开jQuery对 formdata 的默认处理,XMLHttpRequest会对 formdata 进行正确的处理
+                 contentType: false,     //必须false才会自动加上正确的Content-Type
+                 success: function (responseStr) {
+                     //console.log(responseStr);
+                     var imgPath = JSON.parse(responseStr).newPath;
+                     console.log(imgPath);
+                     _this.state = true;
+                     _this.imgList.push(imgPath);
+                 },
+                 error: function (responseStr) {
+                     window.f7.alert("上传出错");
+                 }
+             });
+         }
+     }
 }
 </script>
 
