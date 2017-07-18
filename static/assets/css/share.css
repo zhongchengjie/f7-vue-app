@@ -4,6 +4,8 @@
 .share-list{margin-top:0px}
 .share-list ul{padding-bottom:20px}
 .share-list ul li{margin-bottom:20px}
+.share-list.with-border ul li{margin-bottom:10px}
+.share-list.with-border ul li:after{content: '';position: absolute;left:16px;bottom: 0;right: auto;top: auto;height: 1px;width: 95%;background-color: #c8c7cc;display: block;z-index: 15;}
 .share-list .item-media img{width:48px;height:48px;border-radius: 50%;}
 .share-list .item-inner:after{display: none;}
 .share-list .item-after{font-size: 14px;margin-top:4px}

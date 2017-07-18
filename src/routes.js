@@ -12,8 +12,20 @@ export default [
         component: require('./pages/modifyPwd.vue')
     },
     {
+        path: '/myShare/',
+        component: require('./pages/myShare.vue')
+    },
+/*    {
+        path: '/myFavor/',
+        component: require('./pages/myFavor.vue')
+    },*/
+    {
         path: '/personInfo/',
         component: require('./pages/personInfo.vue')
+    },
+    {
+        path: '/update/',
+        component: require('./pages/update.vue')
     }
 
 ]

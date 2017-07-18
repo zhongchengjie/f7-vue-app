@@ -12,13 +12,15 @@ var sqlMap = {
     },
     share:{
     	add:"insert into m_share (share_id,share_content,share_photo,create_time,create_user) values (UUID(),?,?,now(),?)",
-    	queryAll:"select share.*,DATE_FORMAT(share.create_time,'%Y-%m-%d %H:%i:%s') as share_time, u.* from  m_share share,m_user u where share.create_user = u.user_id order by share.create_time desc;",
+    	queryAll:"select share.*,DATE_FORMAT(share.create_time,'%Y-%m-%d %H:%i:%s') as share_time, u.* from  m_share share,m_user u where share.create_user = u.user_id order by share.create_time desc",
+        queryMy:"select share.*,DATE_FORMAT(share.create_time,'%Y-%m-%d %H:%i:%s') as share_time, u.* from  m_share share,m_user u where u.user_id=? order by share.create_time desc",
         detail:"select * from m_share where share_id=?",
         updateLikeNum:"update m_share set like_num=like_num+1 where share_id=?",
         updateFavorNum:"update m_share set favor_num=favor_num+1 where share_id=?"
     },
     favor:{
     	add:"insert into m_favorite (favorite_id,user_id,share_id,create_time) values (UUID(),?,?,now())",
+    	favored:"select favorite_id from m_favorite where user_id=? and share_id=?"
     }
 }
 

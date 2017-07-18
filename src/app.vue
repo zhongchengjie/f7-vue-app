@@ -33,11 +33,9 @@ export default {
         "login-view":loginView
     },
     mounted:function(){
+    	  //console.log("app mounted");
         eventBus.$on("loginAfter", this.loginAfter);
         eventBus.$on("refresh", this.getNewShare);       //重新加载数据
-    },
-    updated:function (){
-    	  
     },
     methods:{
         //查询最新动态的数据
@@ -53,8 +51,9 @@ export default {
         //回填登录用户的信息
         setUserInfo:function(){
              this.user.u_photo = localStorage.getItem("userPhoto")||"../../static/assets/images/user_photo.jpg";
-             this.user.u_name = localStorage.getItem("userName")||"not login"
-             this.user.u_signature = localStorage.getItem("signature")||"哈哈"
+             this.user.u_name = localStorage.getItem("userName")||"not login";
+             this.user.u_signature = localStorage.getItem("signature")||"哈哈";
+             //console.log(localStorage.getItem("signature"));
         },
 
         //登录后

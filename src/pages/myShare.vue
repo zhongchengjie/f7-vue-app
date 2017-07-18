@@ -1,30 +1,24 @@
 <template>
-	<f7-view id="view-1" tab active navbar-through toolbar-through>
-        <app-navbar :type="'3'"></app-navbar>
-        <f7-pages>
-          <f7-page name="home" pull-to-refresh  ptr:pullmove="refresh">
-              <div class="banner">
-                <img src="../../static/assets/images/banner.jpg">
-              </div>
-              <f7-list media-list  class="share-list">
-                  <f7-list-item v-for="item in list"
-                                media="<img src='../../static/assets/images/user_photo.jpg'>"
-                                :title="item.user_name"
-                                :after="timeTransform(item.share_time)"
-                                :text="item.share_content">
-                      <div slot="root" class="share-photo" v-if="item.share_photo">
-                          <img v-for="photo in item.share_photo_arr" :src="photo" @click="openPhotoBrowser"></img>
-                          <f7-photo-browser ref="pb"  :photos="photos" @open="onOpen"></f7-photo-browser>
-                      </div>
-                      <div slot="root" class="share-icon">
-                          <span @click="updateLikeNum(item.share_id)"><i class="icon iconfont icon-hengtianjinfuicon03">&nbsp;</i>{{item.like_num}}</span>&nbsp;
-                          <span @click="ifFavor(item.share_id)"><i class="icon iconfont icon-xihuan">&nbsp;</i>{{item.favor_num}}</span>
-                      </div>
-                  </f7-list-item>
-              </f7-list>
-          </f7-page>
-        </f7-pages>
-    </f7-view> <!--end of view1-->
+	<div>
+	    <app-navbar :type="'1'" :title="'我的分享'" ></app-navbar>
+	    <f7-pages>
+	        <f7-page name="myShare" @page:init="hideToolBar" @page:back="showToolBar">
+       	        <f7-list media-list  class="share-list with-border">
+	                <f7-list-item v-for="item in list"
+	                            :title="item.share_content"
+	                            :after="timeTransform(item.share_time)">
+	                    <div slot="root" class="share-photo" v-if="item.share_photo" style="padding-left:20px">
+	                       <img v-for="photo in item.share_photo_arr" :src="photo" ></img>
+	                    </div>
+	                    <div slot="root" class="share-icon">
+	                        <span @click="updateLikeNum(item.share_id)"><i class="icon iconfont icon-hengtianjinfuicon03">&nbsp;</i>{{item.like_num}}</span>&nbsp;
+	                        <span @click="ifFavor(item.share_id)"><i class="icon iconfont icon-xihuan">&nbsp;</i>{{item.favor_num}}</span>
+	                    </div>
+	                </f7-list-item>
+	            </f7-list>
+		    </f7-page>
+	    </f7-pages>
+    </div>
 </template>
 
 
@@ -32,37 +26,31 @@
 import appNavbar from "../components/navbar.vue"
 export default {
     name:"home",
-    props:["shareList"],
     data:function () {
        return {
-        photos: [
-		          {
-		            url: 'http://lorempixel.com/1024/1024/sports/1/',
-		            caption: 'Picture 1'
-		          },
-		          {
-		            url: 'http://lorempixel.com/1024/1024/sports/2/',
-		            caption: 'Picture 2'
-		          }
-		        ]
+          list:[]
        }
     },
     components:{
         "app-navbar":appNavbar
     },
-    mounted:function (){
-        eventBus.$on("iconClick", this.addShare);         //新增
-    },
-    computed:{
-        list:function(){
-            return this.shareList;
-        }
+    mounted:function(){
+    	this.getMyShare();
     },
     methods:{
-        //刷新数据
-        refresh:function(){
-
-        },
+    	//我的分享
+    	getMyShare:function(){
+    		var user_id = localStorage.getItem("userId")
+    		this.$http.post('/api/share/getMy',{user_id:user_id}).then((data) => {
+                var shareList = data.body;
+                console.log(shareList);
+                for(var i=0;i<shareList.length;i++){
+                	
+                    shareList[i].share_photo_arr =  shareList[i].share_photo==""?[]:shareList[i].share_photo.split(",");
+                }
+                this.list = shareList;
+            })
+    	},
         //时间格式转换
         timeTransform:function(timeStr){
             var result = timeStr;
@@ -85,10 +73,6 @@ export default {
                 result = timeStr.substr(5);
             }
             return result;
-        },
-        //发表新主题
-        addShare:function(){
-            window.f7.views[0].loadPage('/addShare/');
         },
         //判断是否已经收藏
         ifFavor:function(share_id){
@@ -154,14 +138,13 @@ export default {
                 }
             })
         },
-        openPhotoBrowser:function(){
-        	 console.log(this.$refs.pb);
-        	 this.$refs.pb.open();
-        },
-        onOpen:function(){
-        	console.log("1111")
-        }
-       
+        
+         hideToolBar:function () {
+              window.Dom7(".toolbar").hide();
+          },
+          showToolBar:function () {
+              window.Dom7(".toolbar").show();
+          }
 
     }
 }

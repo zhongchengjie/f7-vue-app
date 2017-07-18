@@ -12,8 +12,8 @@
                   ></f7-list-item>
               </f7-list>
               <f7-list style="margin-top:10px">
-                  <f7-list-item link="/item/" media="<i class='icon iconfont icon-pengyouquan'></i>" title="我的圈子"></f7-list-item>
-                  <f7-list-item link="/item/" media="<i class='icon iconfont icon-shoucang'></i>" title="我的收藏"></f7-list-item>
+                  <f7-list-item link="/myShare/" media="<i class='icon iconfont icon-pengyouquan'></i>" title="我的分享"></f7-list-item>
+                  <f7-list-item link="/myFavor/" media="<i class='icon iconfont icon-shoucang'></i>" title="我的收藏"></f7-list-item>
                   <f7-list-item link="/modifyPwd/" media="<i class='icon iconfont icon-shezhi'></i>" title="修改密码"></f7-list-item>
               </f7-list>
               <div><big-btn :btn-name="'退出登录'" :bg="'#ff2d55'" :type="'logout'"></big-btn></div>

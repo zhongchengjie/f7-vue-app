@@ -38,6 +38,21 @@ router.post('/add', (req, res) => {
      })
 });
 
+//判断是否已经收藏
+router.post('/favored', (req, res) => {
+     var sql = $sql.favor.favored;
+     var params = req.body;
+     console.log(params);
+     conn.query(sql,[params.user_id,params.share_id], function(err, result) {
+         if (err) {
+            console.log(err);
+         }
+         if (result) {
+            jsonWrite(res, result);
+         }
+     })
+});
+
 
 
 module.exports = router;

@@ -37,16 +37,16 @@ export default {
 	 	  }
 	 },
 	 components:{
-         "app-navbar":appNavbar,
-         "page-view":pageView,
-         "big-btn":bigBtn
+        "app-navbar":appNavbar,
+        "page-view":pageView,
+        "big-btn":bigBtn
 	 },
-     mounted:function () {
-         eventBus.$on("share", this.shareMoments);
-     },
-     destroyed:function(){
-         eventBus.$off("refresh");
-     },
+   mounted:function () {
+      eventBus.$on("share", this.shareMoments);
+   },
+   destroyed:function(){
+      //eventBus.$off("refresh");   //不能销毁该事件，否则第二次进入此页面新增后，无法刷新首页的数据
+   },
 	 methods: {
          shareMoments: function () {
              var _this = this;

@@ -35,6 +35,21 @@ router.get('/getAll', (req, res) => {
     })
 });
 
+// 查询我的分享
+router.post('/getMy', (req, res) => {
+    var sql = $sql.share.queryMy;
+    var params = req.body;
+    console.log(params);
+    conn.query(sql,[params.user_id],function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+
 //发表分享
 router.post('/add', (req, res) => {
      var sql = $sql.share.add;
@@ -62,7 +77,6 @@ router.get('/getDetail', (req, res) => {
         }
     })
 });
-
 
 //点赞
 router.post('/updateLikeNum', (req, res) => {
