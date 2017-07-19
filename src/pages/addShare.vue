@@ -1,31 +1,27 @@
 <template>
-	  <div>
-      <app-navbar :type="'1'" :title="'发布圈子'"></app-navbar>
-	    <f7-pages>
-            <page-view :page-name="'addShare'">
-                <div  slot="f7-page-content">
-                    <f7-list form style="margin:0px auto" enctype="multipart/form-data" id="shareForm">
-                        <f7-list-item>
-                            <f7-input class="item-textarea" type="textarea" placeholder="发表你此刻的想法..."  v-model="share_content"></f7-input>
-                        </f7-list-item>
-                        <div class="img-box">
-                        	 <div class="img-item" v-for="item in imgList" v-if="state"><img :src="item"></div>
-                        	 <div class="img-item">
-                        	 	   <i class="icon iconfont icon-plus"></i>
-                        	 	   <input type="file" name="fulAvatar" style="" @change="uploadImg">
-                        	 </div> 
+        <app-page :page-name="'addShare'">
+            <div slot="app-page-content">
+                <app-navbar :type="'1'" :title="'发布圈子'"></app-navbar>
+                <f7-list form style="margin:0px auto" enctype="multipart/form-data" id="shareForm">
+                    <f7-list-item>
+                        <f7-input class="item-textarea" type="textarea" placeholder="发表你此刻的想法..."  v-model="share_content"></f7-input>
+                    </f7-list-item>
+                    <div class="img-box">
+                        <div class="img-item" v-for="item in imgList" v-if="state"><img :src="item"></div>
+                        <div class="img-item">
+                            <i class="icon iconfont icon-plus"></i>
+                            <input type="file" name="fulAvatar" style="" @change="uploadImg">
                         </div>
-                    </f7-list>
-                    <div><big-btn :btn-name="'发表'" :bg="'#ff2d55'" :type="'share'"></big-btn></div>
-                </div>
-            </page-view>
-	    </f7-pages>
-    </div>     
+                    </div>
+                </f7-list>
+                <div><big-btn :btn-name="'发表'" :bg="'#ff2d55'" :type="'share'"></big-btn></div>
+            </div>
+        </app-page>
 </template>
 
 <script>
 import appNavbar from "../components/navbar.vue";
-import pageView from "../components/page.vue";
+import appPage from "../components/page.vue";
 import bigBtn from "../components/bigbtn.vue";
 export default {
 	 name:"addShare",
@@ -38,7 +34,7 @@ export default {
 	 },
 	 components:{
         "app-navbar":appNavbar,
-        "page-view":pageView,
+        "app-page":appPage,
         "big-btn":bigBtn
 	 },
    mounted:function () {

@@ -1,26 +1,24 @@
 <template>
-	  <div>
-      <app-navbar :type="'1'" :title="'我的信息'"></app-navbar>
-	    <f7-pages>
-	      	 <page-view :page-name="'personInfo'">
-                <f7-list slot="f7-page-content" class="person-info"> 
-								  <f7-list-item class="user-photo" link="//" title="头像" :after="'<img src='+photo+'>'"></f7-list-item>
-								  <f7-list-item link="/update/" title="昵称" :after="name"></f7-list-item>
-								  <f7-list-item link="/update/" title="签名" :after="signature"></f7-list-item>
-								</f7-list>
-	          </page-view >    
-	    </f7-pages>
-   </div>
+    <app-page :page-name="'personInfo'">]
+		<div slot="app-page-content">
+			 <app-navbar :type="'1'" :title="'我的信息'"></app-navbar>
+			 <f7-list class="person-info">
+				  <f7-list-item class="user-photo" link="//" title="头像" :after="'<img src='+photo+'>'"></f7-list-item>
+				  <f7-list-item :link="'/update/type/1/name/昵称/value/'+name" title="昵称" :after="name"></f7-list-item>
+				  <f7-list-item :link="'/update/type/2/name/个性签名/value/'+signature" title="签名" :after="signature"></f7-list-item>
+			 </f7-list>
+		</div>
+	</app-page>
 </template>
-
 <script>
 import appNavbar from "../components/navbar.vue";
 import bigBtn from "../components/bigbtn.vue";
-import pageView from "../components/page.vue";
+import appPage from "../components/page.vue";
 export default {
 	 name:"register",
 	 data:function(){
 	 	  return{
+		     ok:true,
 	 	  	 photo:"../static/assets/images/user_photo.jpg",
 	 	  	 name:"",
 	 	  	 signature:"哈哈哈哈哈"
@@ -29,14 +27,14 @@ export default {
 	 components:{
 	 	  "app-navbar":appNavbar,
 	 	  "big-btn":bigBtn,
-	 	  "page-view":pageView
+	 	  "app-page":appPage
 	 },
 	 mounted:function(){
     	this.name = localStorage.getItem("userName");
     	this.signature = localStorage.getItem("signature");
-   },
+     },
 	 methods:{
-	 	   
+
 	 }
 }
 </script>

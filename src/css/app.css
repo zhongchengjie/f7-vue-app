@@ -4,7 +4,7 @@ body{font-family:"Helvetica, Arial, sans-serif,Helvetica Neue";}
 /* 导航条 css */
 .navbar{background: #ff2d55}
 .navbar .left a{color: #ffffff;margin-left:5px}
-.navbar .left i.iconfont{margin-left:-20px}
+.navbar .left i.iconfont{margin-left:-10px}
 .navbar .center{font-size: 18px;color: #ffffff;}
 .navbar .right a{color: #ffffff;}
 .navbar .right i.iconfont{font-size:26px;margin-top:8px}

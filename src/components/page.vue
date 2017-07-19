@@ -1,6 +1,6 @@
 <template>
 	<f7-page :name="pageName" @page:init="hideToolBar" @page:back="showToolBar">
-		<slot name="f7-page-content"></slot>
+		<slot name="app-page-content"></slot>
 	</f7-page>
 </template>
 

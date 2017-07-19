@@ -8,7 +8,9 @@ var sqlMap = {
         query: 'select * from m_user',
         login: 'select * from m_user where user_mobile=? and user_pwd=?',
         register:'insert into m_user (user_id,user_name,user_mobile,user_pwd) values (?,?,?,?)',
-        modify:'update m_user set user_pwd=? where user_id=?'
+        modify:'update m_user set user_pwd=? where user_id=?',
+        updateName:'update m_user set user_name=? where user_id=?',
+        updateSign:'update m_user set user_signature=? where user_id=?'
     },
     share:{
     	add:"insert into m_share (share_id,share_content,share_photo,create_time,create_user) values (UUID(),?,?,now(),?)",

@@ -77,4 +77,33 @@ router.post('/modifyPwd', (req, res) => {
      })
 });
 
+
+router.post('/updateName', (req, res) => {
+    var sql = $sql.user.updateName;
+    var params = req.body;
+    console.log(params);
+    conn.query(sql, [params.name,params.userId], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+
+router.post('/updateSign', (req, res) => {
+    var sql = $sql.user.updateSign;
+    var params = req.body;
+    console.log(params);
+    conn.query(sql, [params.signature,params.userId], function(err, result) {
+        if (err) {
+            console.log(err);
+        }
+        if (result) {
+            jsonWrite(res, result);
+        }
+    })
+});
+
 module.exports = router;

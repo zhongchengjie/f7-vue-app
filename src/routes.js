@@ -24,7 +24,7 @@ export default [
         component: require('./pages/personInfo.vue')
     },
     {
-        path: '/update/',
+        path: '/update/type/:type/name/:name/value/:value',
         component: require('./pages/update.vue')
     }
 

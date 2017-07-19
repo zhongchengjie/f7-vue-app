@@ -1,5 +1,5 @@
 <template>
-	<f7-view id="view-1" tab active navbar-through toolbar-through>
+	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true">
         <app-navbar :type="'3'"></app-navbar>
         <f7-pages>
           <f7-page name="home" pull-to-refresh  ptr:pullmove="refresh">

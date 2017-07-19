@@ -41,6 +41,9 @@ export default {
 	  	 	  
 	  	 }
 	  },
+	  destroyed:function(){
+          eventBus.$off("iconClick");     //点击右边图标
+	  },
 	  methods:{
 	      iconClick:function () {
             eventBus.$emit("iconClick");     //点击右边图标

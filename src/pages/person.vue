@@ -1,5 +1,5 @@
 <template>
-    <f7-view id="view-2" tab  navbar-through toolbar-through>
+    <f7-view id="view-2" tab  navbar-through toolbar-through :dynamic-navbar="true">
         <f7-navbar title="个人"></f7-navbar>
         <f7-pages>
           <f7-page name="person" class="person">
