@@ -42,7 +42,10 @@ export default {
 	  	 }
 	  },
 	  destroyed:function(){
-          eventBus.$off("iconClick");     //点击右边图标
+          //eventBus.$off("iconClick");     //点击右边图标    （关闭后从新增页面返回主页面时无法再次进入新增页面）
+	      if(this.type=="4"){
+	      	  eventBus.$off("iconClick"); 
+	      }
 	  },
 	  methods:{
 	      iconClick:function () {

@@ -15,10 +15,10 @@ export default [
         path: '/myShare/',
         component: require('./pages/myShare.vue')
     },
-/*    {
+    {
         path: '/myFavor/',
         component: require('./pages/myFavor.vue')
-    },*/
+    },
     {
         path: '/personInfo/',
         component: require('./pages/personInfo.vue')

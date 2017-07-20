@@ -1,35 +1,30 @@
 <template>
-	  <div>
-      <app-navbar :type="'1'" :title="'修改密码'"></app-navbar>
-	    <f7-pages>
-	      	 <page-view :page-name="'register'">
-                <div  slot="f7-page-content">
-					         <f7-list form style="margin-top:0px;">
-				              <f7-list-item>
-				                <f7-label>旧密码</f7-label>
-				                <f7-input type="password" placeholder="请输入旧密码" v-model="oldPwd"/>
-				              </f7-list-item>
-				              <f7-list-item>
-				                <f7-label>新密码</f7-label>
-				                <f7-input type="password" placeholder="请输入新密码" v-model="newPwd"/>
-				              </f7-list-item>
-				              <f7-list-item>
-				                <f7-label>确认新密码</f7-label>
-				                <f7-input type="password" placeholder="请再次输入新密码" v-model="confirmPwd"/>
-				              </f7-list-item>
-				            </f7-list>
-				            <div><big-btn :btn-name="'提交'" :bg="'#ff2d55'" :type="'modifyPwd'"></big-btn></div>
-	              </div>
-	          </page-view >    
-	    </f7-pages>
-    </div>
-      
+  <app-page :page-name="'register'">
+  	  <div slot="app-page-content">
+  	  	  <app-navbar :type="'1'" :title="'修改密码'"></app-navbar>
+  	  	  <f7-list form style="margin-top:0px;">
+	              <f7-list-item>
+	                <f7-label>旧密码</f7-label>
+	                <f7-input type="password" placeholder="请输入旧密码" v-model="oldPwd"/>
+	              </f7-list-item>
+	              <f7-list-item>
+	                <f7-label>新密码</f7-label>
+	                <f7-input type="password" placeholder="请输入新密码" v-model="newPwd"/>
+	              </f7-list-item>
+	              <f7-list-item>
+	                <f7-label>确认新密码</f7-label>
+	                <f7-input type="password" placeholder="请再次输入新密码" v-model="confirmPwd"/>
+	              </f7-list-item>
+          </f7-list>
+          <div><big-btn :btn-name="'提交'" :bg="'#ff2d55'" :type="'modifyPwd'"></big-btn></div>
+  	  </div>
+  </app-page>    
 </template>
 
 <script>
 import appNavbar from "../components/navbar.vue";
 import bigBtn from "../components/bigbtn.vue";
-import pageView from "../components/page.vue";
+import appPage from "../components/page.vue";
 export default {
 	 name:"register",
 	 data:function(){
@@ -42,7 +37,7 @@ export default {
 	 components:{
 	 	  "app-navbar":appNavbar,
 	 	  "big-btn":bigBtn,
-	 	  "page-view":pageView
+	 	  "app-page":appPage
 	 },
 	 mounted:function(){
     	eventBus.$on("modifyPwd", this.modifyPwd);

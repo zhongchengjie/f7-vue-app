@@ -1,27 +1,22 @@
 <template>
-	  <div>
-      <app-navbar :type="'1'" :title="'注册'"></app-navbar>
-	    <f7-pages>
-	      <f7-page name="register">
-	         <f7-list form style="margin-top:0px;">
-              <f7-list-item>
-                <f7-label>手机号</f7-label>
-                <f7-input type="text" placeholder="请输入手机号码" v-model="user.mobile"/>
-              </f7-list-item>
-              <f7-list-item>
-                <f7-label>用户名</f7-label>
-                <f7-input type="text" placeholder="请输入用户名" v-model="user.name"/>
-              </f7-list-item>
-              <f7-list-item>
-                <f7-label>密码</f7-label>
-                <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
-              </f7-list-item>
-            </f7-list>
-            <div><big-btn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></big-btn></div>
-	      </f7-page>
-	    </f7-pages>
-    </div>
-      
+	  <f7-page name="register">
+	  	 <app-navbar :type="'1'" :title="'注册'"></app-navbar>
+	     <f7-list form style="margin-top:0px;">
+		      <f7-list-item>
+		        <f7-label>手机号</f7-label>
+		        <f7-input type="text" placeholder="请输入手机号码" v-model="user.mobile"/>
+		      </f7-list-item>
+		      <f7-list-item>
+		        <f7-label>用户名</f7-label>
+		        <f7-input type="text" placeholder="请输入用户名" v-model="user.name"/>
+		      </f7-list-item>
+		      <f7-list-item>
+		        <f7-label>密码</f7-label>
+		        <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
+		      </f7-list-item>
+	    </f7-list>
+	    <div><big-btn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></big-btn></div>
+	  </f7-page>
 </template>
 
 <script>

@@ -16,17 +16,18 @@
 import appNavbar from "../components/navbar.vue";
 export default {
 	 name:"update",
-     props:["type","value"],
+   props:["type"],
 	 data:function(){
 	 	  return{
+	 	     value:""
 	 	  }
 	 },
 	 components:{
         "app-navbar":appNavbar
 	 },
-     mounted:function () {
+   mounted:function () {
          eventBus.$on("iconClick", this.updateInfo);
-     },
+   },
 	 methods: {
          updateInfo:function(){
              var _this = this;

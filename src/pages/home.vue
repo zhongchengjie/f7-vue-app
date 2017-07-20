@@ -1,5 +1,5 @@
 <template>
-	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true">
+	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true" @tab:show="a">
         <app-navbar :type="'3'"></app-navbar>
         <f7-pages>
           <f7-page name="home" pull-to-refresh  ptr:pullmove="refresh">
@@ -7,15 +7,15 @@
                 <img src="../../static/assets/images/banner.jpg">
               </div>
               <f7-list media-list  class="share-list">
-                  <f7-list-item v-for="item in list"
+                  <f7-list-item v-for="(item,index) in list"
                                 media="<img src='../../static/assets/images/user_photo.jpg'>"
                                 :title="item.user_name"
                                 :after="timeTransform(item.share_time)"
                                 :text="item.share_content">
                       <div slot="root" class="share-photo" v-if="item.share_photo">
-                          <img v-for="photo in item.share_photo_arr" :src="photo" @click="openPhotoBrowser"></img>
-                          <f7-photo-browser ref="pb"  :photos="photos" @open="onOpen"></f7-photo-browser>
+                          <img v-for="photo in item.share_photo_arr" :src="photo" @click="openPhotoBrowser(item.share_id)"></img>                     
                       </div>
+                      <f7-photo-browser  v-if="item.share_photo" :ref="'pb_'+item.share_id" :photos="item.share_photo_arr" theme="dark" ofText="/" backLinkText="关闭"></f7-photo-browser>
                       <div slot="root" class="share-icon">
                           <span @click="updateLikeNum(item.share_id)"><i class="icon iconfont icon-hengtianjinfuicon03">&nbsp;</i>{{item.like_num}}</span>&nbsp;
                           <span @click="ifFavor(item.share_id)"><i class="icon iconfont icon-xihuan">&nbsp;</i>{{item.favor_num}}</span>
@@ -35,16 +35,6 @@ export default {
     props:["shareList"],
     data:function () {
        return {
-        photos: [
-		          {
-		            url: 'http://lorempixel.com/1024/1024/sports/1/',
-		            caption: 'Picture 1'
-		          },
-		          {
-		            url: 'http://lorempixel.com/1024/1024/sports/2/',
-		            caption: 'Picture 2'
-		          }
-		        ]
        }
     },
     components:{
@@ -71,7 +61,7 @@ export default {
             var timeStamp1 = date_time.getTime();   //创建时间的时间戳1
             var timeStamp2 = new Date().getTime();  //当前时间的时间戳2
             var _time = parseInt((timeStamp2-timeStamp1)/60000);      //相差分钟数
-            //console.log(_time);
+            console.log(_time);
             if(_time<3){
                 result = "刚刚";
             }
@@ -79,7 +69,7 @@ export default {
                 result = _time+"分钟前";
             }
             else if(_time<24*60){
-                result = parseInt(_time/24)+"小时前";
+                result = parseInt(_time/60)+"小时前";
             }
             else{
                 result = timeStr.substr(5);
@@ -154,12 +144,16 @@ export default {
                 }
             })
         },
-        openPhotoBrowser:function(){
-        	 console.log(this.$refs.pb);
-        	 this.$refs.pb.open();
+        openPhotoBrowser:function(share_id){
+        	 //console.log(index);
+        	 console.log(this.$refs);
+        	 //console.log(this.$refs.pb[0]);
+        	 console.log(this.$refs['pb_'+share_id][0]);
+        	 this.$refs['pb_'+share_id][0].open();
         },
-        onOpen:function(){
-        	console.log("1111")
+        a:function(){
+        	 console.log("1111");
+        	 eventBus.$emit("iconClick");         //新增
         }
        
 

@@ -1,6 +1,6 @@
 <template>
 	<f7-login-screen  v-if="loginState=='1'">
-	  <f7-view navbar-through toolbar-through>
+	  <f7-view navbar-through toolbar-through :dynamic-navbar="true">
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
 	      <f7-page login-screen name="login">
@@ -21,7 +21,7 @@
 	  </f7-view>
 	</f7-login-screen>
     <f7-login-screen opened v-else>
-	  <f7-view navbar-through toolbar-through>
+	  <f7-view navbar-through toolbar-through :dynamic-navbar="true">
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
 	      <f7-page login-screen name="login">
