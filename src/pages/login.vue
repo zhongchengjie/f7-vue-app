@@ -1,42 +1,42 @@
 <template>
-	<f7-login-screen  v-if="loginState=='1'">
+	<f7-login-screen  v-if="loginState=='1'" class="loginPage">
 	  <f7-view navbar-through toolbar-through :dynamic-navbar="true">
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
 	      <f7-page login-screen name="login">
-            <f7-list form>
+            <f7-list form style="margin-top:80px">
               <f7-list-item>
                 <f7-label>手机号</f7-label>
                 <f7-input type="text" placeholder="请输入手机号码" v-model="user.mobile"/>
               </f7-list-item>
               <f7-list-item>
-                <f7-label>密码</f7-label>
+                <f7-label style="letter-spacing:18px">密码</f7-label>
                 <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
               </f7-list-item>
             </f7-list>
              <div><bigBtn :btn-name="'登录'" :bg="'#ff2d55'" :type="'login'"></bigBtn></div>
-            <p style="float:right;margin-right:10px"><f7-link href="/register/" style="color:#666">注册</f7-link></p>
+            <p style="float:right;margin-right:40px"><f7-link href="/register/" style="color:#666;font-size:16px">注册</f7-link></p>
 	      </f7-page>
 	    </f7-pages>
 	  </f7-view>
 	</f7-login-screen>
-    <f7-login-screen opened v-else>
+    <f7-login-screen opened v-else class="loginPage">
 	  <f7-view navbar-through toolbar-through :dynamic-navbar="true">
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
 	      <f7-page login-screen name="login">
-            <f7-list form>
+            <f7-list form style="margin-top:80px">
               <f7-list-item>
                 <f7-label>手机号</f7-label>
                 <f7-input type="text" placeholder="请输入手机号码" v-model="user.mobile"/>
               </f7-list-item>
               <f7-list-item>
-                <f7-label>密码</f7-label>
+                <f7-label style="letter-spacing:18px">密码</f7-label>
                 <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
               </f7-list-item>
             </f7-list>
             <div><bigBtn :btn-name="'登录'" :bg="'#ff2d55'" :type="'login'"></bigBtn></div>
-            <p style="float:right;margin-right:20px"><f7-link href="/register/" style="color:#666">注册</f7-link></p>
+            <p style="float:right;margin-right:40px"><f7-link href="/register/" style="color:#666;font-size:16px">注册</f7-link></p>
 	      </f7-page>
 	    </f7-pages>
 	  </f7-view>
@@ -63,11 +63,24 @@ export default {
     },
     mounted:function(){
     	eventBus.$on("login", this.login);
+    	eventBus.$on("setLogin",  (mobile,password) =>{
+    		this.user.mobile = mobile
+    		this.user.password = password
+    	});
     },
     methods:{
         //登录验证
         login:function () {
             var _this =this;
+            if(_this.user.mobile.trim()==""){
+            	window.f7.alert("手机号码不能为空")
+            	return;
+            } 
+            if(_this.user.password.trim()==""){
+            	window.f7.alert("密码不能为空")
+            	return;
+            	
+            }
             this.$http.post('/api/user/login',{mobile:_this.user.mobile,password:_this.user.password},{}).then((response) => {
                 var result = response.body;
                 if(result.length!="1"){
@@ -99,6 +112,6 @@ export default {
 </script>
 
 
-<style scoped>
-	.list-block .item-title.label{width:26%}
+<style>
+	.loginPage .list-block .item-title.label{width:24%}
 </style>

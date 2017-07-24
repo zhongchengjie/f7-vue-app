@@ -61,7 +61,7 @@ export default {
             var timeStamp1 = date_time.getTime();   //创建时间的时间戳1
             var timeStamp2 = new Date().getTime();  //当前时间的时间戳2
             var _time = parseInt((timeStamp2-timeStamp1)/60000);      //相差分钟数
-            console.log(_time);
+            //console.log(_time);
             if(_time<3){
                 result = "刚刚";
             }

@@ -11,6 +11,7 @@
       </f7-toolbar>
     </f7-views>
     <login-view :login-state="state"></login-view>
+    <app-toast></app-toast>
   </div>
 </template>
 
@@ -18,6 +19,7 @@
 import homeView from "./pages/home.vue";
 import personView from "./pages/person.vue";
 import loginView from "./pages/login.vue";
+import appToast from "./components/toast.vue";
 export default {
     name:"app",
     data:function () {
@@ -31,6 +33,7 @@ export default {
         "home-view":homeView,
         "person-view":personView,
         "login-view":loginView
+        "app-toast":appToast
     },
     mounted:function(){
     	  //console.log("app mounted");
