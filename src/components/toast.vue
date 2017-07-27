@@ -1,5 +1,5 @@
 <template>
-	<div v-if="status" id="toast">
+	<div v-show="status" id="toast" >
 		<div class="modal-overlay modal-overlay-visible"></div>
 	    <div class="toast">
 			<div class="modal  modal-in" style="display: block;">

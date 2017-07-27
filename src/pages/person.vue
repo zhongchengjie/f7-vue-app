@@ -59,9 +59,11 @@ export default {
                localStorage.setItem("userPwd","");
                localStorage.setItem("userId","");
                localStorage.setItem("signature","");
-               localStorage.setItem("userPhoto","")
+               localStorage.setItem("userPhoto","");
+               //标记为未登录状态
+               localStorage.setItem("loginState",0);
                //打开登录屏
-               localStorage.setItem("loginState",true)
+               myApp.loginScreen("#loginScreen");
            }
     }
 }

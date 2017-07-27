@@ -1,7 +1,7 @@
 class globalHelper {
     toast(text){
-    	console.log(vm.$refs.main);
-        //eventBus.$emit("toast",text)
+    	//console.log(vm.$refs);
+        eventBus.$emit("toast",text)
     }
 	sendPostRequest(options) {
 		var self = this;

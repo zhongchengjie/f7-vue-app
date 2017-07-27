@@ -1,5 +1,5 @@
 <template>
-	<f7-login-screen :opened="state" id="loginScreen">
+	<f7-login-screen :opened="opened" id="loginScreen">
 	  <f7-view navbar-through toolbar-through :dynamic-navbar="true">
 	  	<f7-navbar title="登录"></f7-navbar>
 	    <f7-pages>
@@ -34,11 +34,18 @@ export default {
            user:{mobile:"",password:""}
        }
     },
-    created:function(){
-    	console.log(typeof(this.state));
-    },
     components:{
     	"app-btn":appBtn
+    },
+    computed:{
+	    opened:function(){
+	        if(this.state=="0"){
+	            return true;       //未登录
+            }
+            else{
+	            return false;      //已登录
+            }
+        }
     },
     mounted:function(){
     	eventBus.$on("login", this.login);  //监听登录按钮的点击事件
@@ -73,7 +80,7 @@ export default {
 					eventBus.$emit("toast","用户名或密码错误")
 				}
 				else{
-					 localStorage.setItem("loginState",false); //标记为登录状态
+					 localStorage.setItem("loginState",1); //标记为登录状态
                 	 //保存登录用户的信息
                 	 var user = result[0];
                 	 localStorage.setItem("userId",user.user_id);

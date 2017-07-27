@@ -23,11 +23,11 @@ export default {
     name:"app",
     data:function () {
        return {
-           loginState:localStorage.getItem("loginState"),  //登录状态，true：未登录，false：已登录，默认未登录
+           loginState:localStorage.getItem("loginState")||0,  //登录状态，0：未登录；1：已登录。默认未登录
            shareList:[],
            user:{u_photo:"",u_name:"",u_signature:""},
            modalText:"",
-	 	   	   status:false
+           status:false
        }
     },
     components:{
@@ -36,30 +36,21 @@ export default {
         "login-view":loginView,
         "app-toast":appToast
     },
-    created:function(){
-    	console.log(typeof(localStorage.getItem("loginState")));
-    },
-    computed:{
-    	  /*loginState:function(){
-    	  	  //console.log(store.getters.getLoginState);
-    	  	  //return store.getters.getLoginState;
-    	  }*/
-    },
     mounted:function(){
         eventBus.$on("initData", this.initData);    //登录后查询数据
         eventBus.$on("refresh", this.getNewShare);       //重新加载数据
         //监听toast事件
-	 	    eventBus.$on("toast",  (text) =>{
-	    	    this.openToast(text)
-    	  });
-    	  eventBus.$on("openLogin", this.openLogin);       //打开登录屏
+        eventBus.$on("toast",  (text) =>{
+            this.openToast(text)
+        });
+        eventBus.$on("openLogin", this.openLogin);       //打开登录屏
+
+
+        //this.openToast("1111")
     },
     methods:{
         //查询最新动态的数据
         getNewShare:function(){
-        	  
-        	
-        	
             this.$http.get('/api/share/getAll').then((data) => {
                 var shareList = data.body;
                 for(var i=0;i<shareList.length;i++){
@@ -90,11 +81,11 @@ export default {
 			 		 this.modalText=text;
 			 		 this.status=true;
 			 		 setTimeout(this.closeToast,2000)
-	 	    },
-	 	    closeToast:function(){
-			 		 this.modalText="";
-			 		 this.status=false;
-	 	    }
+        },
+        closeToast:function(){
+                 this.modalText="";
+                 this.status=false;
+        }
     }
 }
 </script>
