@@ -44,7 +44,7 @@ window.$$ = window.Dom7;
 Vue.use(Framework7Vue)
 
 // Init App
-new Vue({
+window.vm = new Vue({
   el: '#app',
   template: '<app/>',
   // Init Framework7 by passing parameters here
@@ -62,3 +62,10 @@ new Vue({
     app: App
   }
 });
+
+//定义myApp对象
+window.myApp = window.f7;
+
+//import
+import globalHelper from "./js/globalHelper.js"
+window.globalHelper = globalHelper;

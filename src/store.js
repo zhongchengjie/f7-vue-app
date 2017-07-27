@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 /*创建一个对象来保存应用启动时的初始状态，刷新页面，会重新初始化state*/
 const state = {
-   loginState:'0'
+   loginState:localStorage.getItem("loginState")||false
 }
 
 
@@ -22,7 +22,9 @@ const getters = {
 const mutations = {
   // TODO: 放置我们的状态变更函数
   setLoginState (state, loginState) {
-    state.loginState = loginState;
+  	 console.log("store=======",loginState)
+  	 localStorage.setItem("loginState",loginState)
+     state.loginState = loginState;
   },
  
 }

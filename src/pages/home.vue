@@ -1,8 +1,8 @@
 <template>
-	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true" @tab:show="a">
+	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true">
         <app-navbar :type="'3'"></app-navbar>
         <f7-pages>
-          <f7-page name="home" pull-to-refresh  ptr:pullmove="refresh">
+          <f7-page name="home" pull-to-refresh @ptr:refresh="refresh">
               <div class="banner">
                 <img src="../../static/assets/images/banner.jpg">
               </div>
@@ -51,7 +51,10 @@ export default {
     methods:{
         //刷新数据
         refresh:function(){
-
+            setTimeout(function () {
+            	eventBus.$emit("refresh");
+                myApp.pullToRefreshDone();
+            }, 2000);
         },
         //时间格式转换
         timeTransform:function(timeStr){
@@ -150,10 +153,6 @@ export default {
         	 //console.log(this.$refs.pb[0]);
         	 console.log(this.$refs['pb_'+share_id][0]);
         	 this.$refs['pb_'+share_id][0].open();
-        },
-        a:function(){
-        	 console.log("1111");
-        	 eventBus.$emit("iconClick");         //新增
         }
        
 

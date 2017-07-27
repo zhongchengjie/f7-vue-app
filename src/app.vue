@@ -1,5 +1,4 @@
 <template>
-  <!-- App -->
   <div id="app">
     <f7-statusbar></f7-statusbar>
     <f7-views tabs>
@@ -10,8 +9,8 @@
         <f7-link icon="iconfont icon-yonghu" text="个人" tab-link="#view-2"></f7-link>
       </f7-toolbar>
     </f7-views>
-    <login-view :login-state="state"></login-view>
-    <app-toast></app-toast>
+    <login-view :state="loginState"></login-view>
+    <app-toast :text="modalText" :status="status"></app-toast>
   </div>
 </template>
 
@@ -24,29 +23,49 @@ export default {
     name:"app",
     data:function () {
        return {
-           state:localStorage.getItem("loginState")||'0',
+           loginState:localStorage.getItem("loginState"),  //登录状态，true：未登录，false：已登录，默认未登录
            shareList:[],
-           user:{u_photo:"",u_name:"",u_signature:""}
+           user:{u_photo:"",u_name:"",u_signature:""},
+           modalText:"",
+	 	   	   status:false
        }
     },
     components:{
         "home-view":homeView,
         "person-view":personView,
-        "login-view":loginView
+        "login-view":loginView,
         "app-toast":appToast
     },
+    created:function(){
+    	console.log(typeof(localStorage.getItem("loginState")));
+    },
+    computed:{
+    	  /*loginState:function(){
+    	  	  //console.log(store.getters.getLoginState);
+    	  	  //return store.getters.getLoginState;
+    	  }*/
+    },
     mounted:function(){
-    	  //console.log("app mounted");
-        eventBus.$on("loginAfter", this.loginAfter);
+        eventBus.$on("initData", this.initData);    //登录后查询数据
         eventBus.$on("refresh", this.getNewShare);       //重新加载数据
+        //监听toast事件
+	 	    eventBus.$on("toast",  (text) =>{
+	    	    this.openToast(text)
+    	  });
+    	  eventBus.$on("openLogin", this.openLogin);       //打开登录屏
     },
     methods:{
         //查询最新动态的数据
         getNewShare:function(){
+        	  
+        	
+        	
             this.$http.get('/api/share/getAll').then((data) => {
                 var shareList = data.body;
                 for(var i=0;i<shareList.length;i++){
-                    shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
+                	  if(shareList[i].share_photo!=""&&shareList[i].share_photo!=null){
+                	  	 shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
+                	  }
                 }
                 this.shareList = shareList;
             })
@@ -59,15 +78,23 @@ export default {
              //console.log(localStorage.getItem("signature"));
         },
 
-        //登录后
-        loginAfter:function(){
-             this.getNewShare();
-             this.setUserInfo();
-        }
+        //登录后查询数据
+        initData:function(){
+            this.getNewShare();
+            this.setUserInfo();
+        },
+        openLogin:function(){
+        	 this.loginState=false;
+        },
+        openToast:function(text){
+			 		 this.modalText=text;
+			 		 this.status=true;
+			 		 setTimeout(this.closeToast,2000)
+	 	    },
+	 	    closeToast:function(){
+			 		 this.modalText="";
+			 		 this.status=false;
+	 	    }
     }
 }
 </script>
-
-<style scoped>
- 
-</style>

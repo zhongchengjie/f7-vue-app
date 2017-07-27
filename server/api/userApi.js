@@ -18,7 +18,10 @@ var jsonWrite = function(res, ret) {
             msg: '操作失败'
         });
     } else {
-        res.json(ret);
+        res.json({
+        	status:"0",
+            result:ret
+        });
     }
 };
 

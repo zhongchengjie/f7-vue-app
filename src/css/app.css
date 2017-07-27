@@ -25,3 +25,6 @@ p.big-btn .button{letter-spacing: 2px;height:34px;line-height:32px;font-size:16p
 
 /*  文本框 css */
 .item-textarea textarea{height:120px}
+
+/*  样式覆盖 */
+html.ios-gt-8 .navbar .center,html.ios-gt-8 .list-block.media-list .item-title{font-weight:500}

@@ -54,16 +54,14 @@ export default {
     methods:{
           //退出登录
            logout:function(){
-               //store.commit("setLoginState",false);
-               //console.log(store.getters.getLoginState);
-               window.f7.loginScreen(); //打开登录屏
-               localStorage.setItem("loginState",'0');  //标记为未登录状态
                //清除登录用户的信息
                localStorage.setItem("userName","");
                localStorage.setItem("userPwd","");
                localStorage.setItem("userId","");
                localStorage.setItem("signature","");
                localStorage.setItem("userPhoto","")
+               //打开登录屏
+               localStorage.setItem("loginState",true)
            }
     }
 }
