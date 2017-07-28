@@ -1,6 +1,6 @@
 <template>
 	<f7-view id="view-1" tab active navbar-through toolbar-through :dynamic-navbar="true">
-        <app-navbar :type="'3'"></app-navbar>
+        <app-navbar type="3"></app-navbar>
         <f7-pages>
           <f7-page name="home" pull-to-refresh @ptr:refresh="refresh">
               <div class="banner">
@@ -58,30 +58,11 @@ export default {
         },
         //时间格式转换
         timeTransform:function(timeStr){
-            var result = timeStr;
-            var timeStr = timeStr.replace(/-/g,"/")
-            var date_time =new Date(timeStr);
-            var timeStamp1 = date_time.getTime();   //创建时间的时间戳1
-            var timeStamp2 = new Date().getTime();  //当前时间的时间戳2
-            var _time = parseInt((timeStamp2-timeStamp1)/60000);      //相差分钟数
-            //console.log(_time);
-            if(_time<3){
-                result = "刚刚";
-            }
-            else if(_time<60){
-                result = _time+"分钟前";
-            }
-            else if(_time<24*60){
-                result = parseInt(_time/60)+"小时前";
-            }
-            else{
-                result = timeStr.substr(5);
-            }
-            return result;
+           return globalHelper.timeTransform(timeStr);
         },
         //发表新主题
         addShare:function(){
-            window.f7.views[0].loadPage('/addShare/');
+            myApp.views[0].loadPage('/addShare/');
         },
         //判断是否已经收藏
         ifFavor:function(share_id){
@@ -148,10 +129,8 @@ export default {
             })
         },
         openPhotoBrowser:function(share_id){
-        	 //console.log(index);
-        	 console.log(this.$refs);
-        	 //console.log(this.$refs.pb[0]);
-        	 console.log(this.$refs['pb_'+share_id][0]);
+        	 //console.log(this.$refs);
+        	 // console.log(this.$refs['pb_'+share_id][0]);
         	 this.$refs['pb_'+share_id][0].open();
         }
        

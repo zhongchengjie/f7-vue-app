@@ -1,6 +1,6 @@
 <template>
 	<div>
-	    <app-navbar :type="'1'" :title="'我的分享'" ></app-navbar>
+	    <app-navbar type="1" title="我的分享" ></app-navbar>
 	    <f7-pages>
 	        <f7-page name="myShare" @page:init="hideToolBar" @page:back="showToolBar">
        	        <f7-list media-list  class="share-list with-border">
@@ -20,6 +20,7 @@
 	    </f7-pages>
     </div>
 </template>
+
 
 
 <script>
@@ -53,26 +54,7 @@ export default {
     	},
         //时间格式转换
         timeTransform:function(timeStr){
-            var result = timeStr;
-            var timeStr = timeStr.replace(/-/g,"/")
-            var date_time =new Date(timeStr);
-            var timeStamp1 = date_time.getTime();   //创建时间的时间戳1
-            var timeStamp2 = new Date().getTime();  //当前时间的时间戳2
-            var _time = parseInt((timeStamp2-timeStamp1)/60000);      //相差分钟数
-            //console.log(_time);
-            if(_time<3){
-                result = "刚刚";
-            }
-            else if(_time<60){
-                result = _time+"分钟前";
-            }
-            else if(_time<24*60){
-                result = parseInt(_time/24)+"小时前";
-            }
-            else{
-                result = timeStr.substr(5);
-            }
-            return result;
+            return globalHelper.timeTransform(timeStr);
         },
         //判断是否已经收藏
         ifFavor:function(share_id){

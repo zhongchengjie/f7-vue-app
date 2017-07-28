@@ -19,6 +19,10 @@ import homeView from "./pages/home.vue";
 import personView from "./pages/person.vue";
 import loginView from "./pages/login.vue";
 import appToast from "./components/toast.vue";
+
+import globalHelper from "./js/globalHelper.js"
+window.globalHelper = globalHelper;
+
 export default {
     name:"app",
     data:function () {
@@ -43,30 +47,44 @@ export default {
         eventBus.$on("toast",  (text) =>{
             this.openToast(text)
         });
-        eventBus.$on("openLogin", this.openLogin);       //打开登录屏
-
-
-        //this.openToast("1111")
+        
+        if(localStorage.getItem("loginState")==1){
+        	  this.initData();
+        }
     },
     methods:{
         //查询最新动态的数据
         getNewShare:function(){
-            this.$http.get('/api/share/getAll').then((data) => {
-                var shareList = data.body;
-                for(var i=0;i<shareList.length;i++){
-                	  if(shareList[i].share_photo!=""&&shareList[i].share_photo!=null){
-                	  	 shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
-                	  }
-                }
-                this.shareList = shareList;
-            })
+        	  var _this = this;
+		        // 请求成功
+					  var success = function(res) {
+					  	  var shareList = res.result;
+					      for(var i=0;i<shareList.length;i++){
+		                if(shareList[i].share_photo!=""&&shareList[i].share_photo!=null){
+		                	  shareList[i].share_photo_arr =  shareList[i].share_photo.split(",");
+		                }
+		            }
+		            _this.shareList = shareList;
+					  };
+					  // 请求失败
+					  var error = function(res) {
+						    eventBus.$emit("toast","出错了，请稍后重试")
+					  };
+					  //开始请求
+					  globalHelper.ajax({
+								"url":"/api/share/getAll",
+								"method":"get",
+								"success": success, // 请求成功后的回调方法
+								"params":{},
+								"error": error,
+								"async": true
+					  });
         },
         //回填登录用户的信息
         setUserInfo:function(){
              this.user.u_photo = localStorage.getItem("userPhoto")||"../../static/assets/images/user_photo.jpg";
              this.user.u_name = localStorage.getItem("userName")||"not login";
              this.user.u_signature = localStorage.getItem("signature")||"哈哈";
-             //console.log(localStorage.getItem("signature"));
         },
 
         //登录后查询数据
@@ -74,17 +92,14 @@ export default {
             this.getNewShare();
             this.setUserInfo();
         },
-        openLogin:function(){
-        	 this.loginState=false;
-        },
         openToast:function(text){
 			 		 this.modalText=text;
 			 		 this.status=true;
 			 		 setTimeout(this.closeToast,2000)
         },
         closeToast:function(){
-                 this.modalText="";
-                 this.status=false;
+            this.modalText="";
+            this.status=false;
         }
     }
 }

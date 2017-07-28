@@ -8,17 +8,12 @@
 export default {
 	  name:"page",
 	  props:["pageName"],
-	  data:function(){
-	  	 return{
-
-	  	 }
-	  },
 	  methods:{
           hideToolBar:function () {
-              window.Dom7(".toolbar").hide();
+              $$(".views .toolbar").hide();
           },
           showToolBar:function () {
-              window.Dom7(".toolbar").show();
+              $$(".views .toolbar").show();
           }
 	  }
 }

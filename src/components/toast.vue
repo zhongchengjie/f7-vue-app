@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style scoped>
-.modal{width:auto;margin-left:0;left:0;top:0;position: static;}
-.toast{display: flex;justify-content: center; align-items: center;width: 100%;height: 100%; position: absolute;top: 0;left: 0}
-.modal .modal-inner{font-size:13px;padding: 4px 20px;background: #333;color: #fff;text-align:center}
+	.modal{width:auto;margin-left:0;left:0;top:0;position: static;}
+	.toast{display: flex;justify-content: center; align-items: center;width: 100%;height: 100%; position: absolute;top: 0;left: 0}
+	.modal .modal-inner{font-size:13px;padding: 4px 20px;background: #333;color: #fff;text-align:center}
 </style>

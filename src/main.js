@@ -43,6 +43,8 @@ window.$$ = window.Dom7;
 // Init F7 Vue Plugin
 Vue.use(Framework7Vue)
 
+
+
 // Init App
 window.vm = new Vue({
   el: '#app',
@@ -66,6 +68,7 @@ window.vm = new Vue({
 //定义myApp对象
 window.myApp = window.f7;
 
-//import
-import globalHelper from "./js/globalHelper.js"
-window.globalHelper = globalHelper;
+/*//import globalHelper
+import globalHelper from "./js/globalHelper"
+window.globalHelper = globalHelper;*/
+

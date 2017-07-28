@@ -1,6 +1,6 @@
 <template>
 	  <f7-page name="register">
-	  	 <app-navbar :type="'1'" :title="'注册'"></app-navbar>
+	  	 <app-navbar type="1" title="注册"></app-navbar>
 	     <f7-list form style="margin-top:0px;">
 		      <f7-list-item>
 		        <f7-label>手机号</f7-label>
@@ -15,13 +15,13 @@
 		        <f7-input type="password" placeholder="请输入密码" v-model="user.password"/>
 		      </f7-list-item>
 	    </f7-list>
-	    <div><big-btn :btn-name="'注册'" :bg="'#ff2d55'" :type="'register'"></big-btn></div>
+	    <div><app-btn btn-name="注册" bg="#ff2d55" type="register"></app-btn></div>
 	  </f7-page>
 </template>
 
 <script>
 import appNavbar from "../components/navbar.vue";
-import bigBtn from "../components/bigbtn.vue";
+import appBtn from "../components/bigBtn.vue";
 export default {
 	 name:"register",
 	 data:function(){
@@ -31,7 +31,7 @@ export default {
 	 },
 	 components:{
 	 	  "app-navbar":appNavbar,
-	 	  "big-btn":bigBtn
+	 	  "app-btn":appBtn
 	 },
 	 mounted:function(){
     	eventBus.$on("register", this.register);
@@ -40,36 +40,57 @@ export default {
 	 	  register:function(){
 	 	  	  var _this = this;
 	 	  	  if(_this.user.mobile.trim()==""){
-            	window.f7.alert("手机号码不能为空")
+            	globalHelper.toast("手机号码不能为空")
             	return;
           } 
           if(_this.user.name.trim()==""){
-            	window.f7.alert("用户名不能为空")
+              globalHelper.toast("用户名不能为空")
             	return;
           } 
           if(_this.user.password.trim()==""){
-            	window.f7.alert("密码不能为空")
+            	globalHelper.toast("密码不能为空")
             	return;
           } 
-	 	  	  var id = new Date().getTime();  //取当前时间戳作为user_id
-          this.$http.post('/api/user/register',{id:id,name:_this.user.name,mobile:_this.user.mobile,password:_this.user.password},{}).then((response) => {
-	            var result = response.body;
-	            console.log(result);
-	            if(result){
-	            	 window.f7.alert("注册成功");
+          
+          
+          //提交参数
+					var params = {
+						  id:new Date().getTime(),
+						  name:_this.user.name,
+						  mobile:_this.user.mobile,
+						  password:_this.user.password
+					};
+					// 请求成功
+					var success = function(res) {
+						  var result = res.result;
+		          if(result){
+	            	 globalHelper.toast("注册成功");
 	            	 var mobile = _this.user.mobile;
 	            	 var password = _this.user.password;
 	            	 _this.user = {mobile:"",name:"",password:""}; //清空输入
-	            	 window.f7.views[2].back();  //返回登录
+	            	 myApp.views[2].back();  //返回登录
 	            	 
 	            	 //将注册成功的账号和密码回填到登录信息中(带参数的事件通信)
 	            	 eventBus.$emit("setLogin",mobile,password)
 	            	 
 	            }
 	            else{
-	            	 window.f7.alert("注册出错");
-	            }
-          })
+	            	 globalHelper.toast("注册失败");
+	            }    
+					};
+					// 请求失败
+					var error = function(res) {
+						  globalHelper.toast("toast","系统繁忙，请稍后重试")
+					};
+					//开始请求
+					globalHelper.ajax({
+							"url":"/api/user/register",
+							"method":"post",
+							"params": params, // action对应的参数
+							"success": success, // 请求成功后的回调方法
+							"error": error,
+							"async": true
+					});
 	 	  }
 	 }
 }

@@ -16,7 +16,7 @@
                   <f7-list-item link="/myFavor/" media="<i class='icon iconfont icon-shoucang'></i>" title="我的收藏"></f7-list-item>
                   <f7-list-item link="/modifyPwd/" media="<i class='icon iconfont icon-shezhi'></i>" title="修改密码"></f7-list-item>
               </f7-list>
-              <div><big-btn :btn-name="'退出登录'" :bg="'#ff2d55'" :type="'logout'"></big-btn></div>
+              <div><app-btn btn-name="退出登录" bg="#ff2d55" type="logout"></app-btn></div>
           </f7-page>
 
         </f7-pages>
@@ -25,7 +25,7 @@
 
 
 <script>
-import bigBtn from "../components/bigbtn.vue";
+import appBtn from "../components/bigBtn.vue";
 export default {
     name:"home",
     props:["user"],
@@ -35,10 +35,7 @@ export default {
        }
     },
     components:{
-        "big-btn":bigBtn
-    },
-    created:function () {
-
+        "app-btn":appBtn
     },
     mounted:function(){
         eventBus.$on("logout", this.logout);
@@ -52,19 +49,19 @@ export default {
         }
     },
     methods:{
-          //退出登录
-           logout:function(){
-               //清除登录用户的信息
-               localStorage.setItem("userName","");
-               localStorage.setItem("userPwd","");
-               localStorage.setItem("userId","");
-               localStorage.setItem("signature","");
-               localStorage.setItem("userPhoto","");
-               //标记为未登录状态
-               localStorage.setItem("loginState",0);
-               //打开登录屏
-               myApp.loginScreen("#loginScreen");
-           }
+        //退出登录
+        logout:function(){
+           //清除登录用户的信息
+           localStorage.setItem("userName","");
+           localStorage.setItem("userPwd","");
+           localStorage.setItem("userId","");
+           localStorage.setItem("signature","");
+           localStorage.setItem("userPhoto","");
+           //标记为未登录状态
+           localStorage.setItem("loginState",0);
+           //打开登录屏
+           myApp.loginScreen("#loginScreen");
+        }
     }
 }
 </script>

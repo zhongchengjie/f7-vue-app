@@ -89,10 +89,10 @@ export default {
                 	 localStorage.setItem("signature",user.user_signature);
                 	 localStorage.setItem("userPhoto",user.user_photo)
 
-                	 eventBus.$emit("initData");     //更新登录用户的信息
-
+                	 eventBus.$emit("initData");     //初始化首页数据
                      myApp.closeModal("#loginScreen"); //关闭登录屏
                      myApp.showTab("#view-1");        //默认显示第一个tab页
+                   /*  window.location.reload();   //重新加载首页*/
 				}
 			};
 			// 请求失败
@@ -100,8 +100,9 @@ export default {
 				eventBus.$emit("toast","登录失败，请稍后重试")
 			};
 			//开始请求
-			globalHelper.sendPostRequest({
+			globalHelper.ajax({
 				"url":"/api/user/login",
+				"method":"post",
 				"params": params, // action对应的参数
 				"success": success, // 请求成功后的回调方法
 				"error": error,
